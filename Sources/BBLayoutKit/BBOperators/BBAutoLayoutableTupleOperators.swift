@@ -1,6 +1,6 @@
 //
-//  AutoLayoutableTupleOperators.swift
-//  AutoLayoutProxy
+//  BBAutoLayoutableTupleOperators.swift
+//  BBLayoutKit
 //
 //  Created by Bibin Jacob Pulickal on 12/08/19.
 //  Copyright © 2019 Bibin Jacob Pulickal. All rights reserved.
@@ -37,17 +37,17 @@ import Cocoa
 
 // MARK: - Double Dimension Anchor Constraint With Constant And Relation
 
-@discardableResult public func == (lhs: (NSLayoutDimension, NSLayoutDimension), rhs: SizeConvertible)
+@discardableResult public func == (lhs: (NSLayoutDimension, NSLayoutDimension), rhs: BBSizeConvertible)
     -> [NSLayoutConstraint] {
         [lhs.0 == rhs.width, lhs.1 == rhs.height]
 }
 
-@discardableResult public func <= (lhs: (NSLayoutDimension, NSLayoutDimension), rhs: SizeConvertible)
+@discardableResult public func <= (lhs: (NSLayoutDimension, NSLayoutDimension), rhs: BBSizeConvertible)
     -> [NSLayoutConstraint] {
         [lhs.0 <= rhs.width, lhs.1 <= rhs.height]
 }
 
-@discardableResult public func >= (lhs: (NSLayoutDimension, NSLayoutDimension), rhs: SizeConvertible)
+@discardableResult public func >= (lhs: (NSLayoutDimension, NSLayoutDimension), rhs: BBSizeConvertible)
     -> [NSLayoutConstraint] {
         [lhs.0 >= rhs.width, lhs.1 >= rhs.height]
 }
@@ -55,19 +55,19 @@ import Cocoa
 // MARK: - Double Anchor And Constant Combinations
 
 public func + (lhs: (NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayoutYAxisAnchor>),
-               rhs: OffsetConvertible)
+               rhs: BBOffsetConvertible)
     -> ((NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayoutYAxisAnchor>), (CGFloat, CGFloat)) {
         ((lhs.0, lhs.1), (rhs.horizontal, rhs.vertical))
 }
 
 public func + (lhs: (NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>),
-               rhs: EdgeInsetConvertible)
+               rhs: BBEdgeInsetConvertible)
     -> ((NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>), (CGFloat, CGFloat)) {
         ((lhs.0, lhs.1), (rhs.left, rhs.right))
 }
 
 public func + (lhs: (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutYAxisAnchor>),
-               rhs: EdgeInsetConvertible)
+               rhs: BBEdgeInsetConvertible)
     -> ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutYAxisAnchor>), (CGFloat, CGFloat)) {
         ((lhs.0, lhs.1), (rhs.top, rhs.bottom))
 }

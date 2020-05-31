@@ -1,12 +1,12 @@
 //
 //  AutoLayoutableHelpers.swift
-//  AutoLayoutProxy
+//  BBLayoutKit
 //
 //  Created by Bibin Jacob Pulickal on 24/08/19.
 //  Copyright © 2019 Bibin Jacob Pulickal. All rights reserved.
 //
 
-public extension AutoLayoutable {
+public extension BBAutoLayoutable {
 
     func addSubview(_ view: View, layout: (() -> Void)) {
         addSubview(view)

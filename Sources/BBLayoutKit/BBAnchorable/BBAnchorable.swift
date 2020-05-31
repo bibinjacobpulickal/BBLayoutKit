@@ -1,6 +1,6 @@
 //
-//  Anchorable.swift
-//  AutoLayoutProxy
+//  BBAnchorable.swift
+//  BBLayoutKit
 //
 //  Created by Bibin Jacob Pulickal on 14/08/19.
 //  Copyright © 2019 Bibin Jacob Pulickal. All rights reserved.
@@ -12,7 +12,7 @@ import UIKit.NSLayoutAnchor
 import AppKit.NSLayoutAnchor
 #endif
 
-public protocol Anchorable {
+public protocol BBAnchorable {
 
     var leadingAnchor: NSLayoutXAxisAnchor { get }
 
@@ -37,6 +37,6 @@ public protocol Anchorable {
 
 #if canImport(UIKit)
 
-extension UILayoutGuide: Anchorable { }
+extension UILayoutGuide: BBAnchorable { }
 
 #endif

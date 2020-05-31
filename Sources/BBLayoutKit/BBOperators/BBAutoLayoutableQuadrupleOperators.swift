@@ -1,6 +1,6 @@
 //
-//  AutoLayoutableQuadrupleOperators.swift
-//  AutoLayoutProxy
+//  BBAutoLayoutableQuadrupleOperators.swift
+//  BBLayoutKit
 //
 //  Created by Bibin Jacob Pulickal on 12/08/19.
 //  Copyright © 2019 Bibin Jacob Pulickal. All rights reserved.
@@ -66,17 +66,17 @@ import AppKit.NSLayoutAnchor
 
 public func + (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>),
     (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>)),
-               rhs: EdgeInsetConvertible)
+               rhs: BBEdgeInsetConvertible)
     -> (((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>),
-    (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>)), EdgeInsetConvertible) {
+    (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>)), BBEdgeInsetConvertible) {
         (lhs, rhs)
 }
 
 public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>),
     (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>)),
-               rhs: EdgeInsetConvertible)
+               rhs: BBEdgeInsetConvertible)
     -> (((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>),
-    (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>)), EdgeInsetConvertible) {
+    (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>)), BBEdgeInsetConvertible) {
         (lhs, rhs)
 }
 
@@ -90,7 +90,7 @@ public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayo
     lhs: ((NSLayoutAnchor<FirstAnchorType>, NSLayoutAnchor<SecondAnchorType>),
     (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)),
     rhs: (((NSLayoutAnchor<FirstAnchorType>, NSLayoutAnchor<SecondAnchorType>),
-    (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)), EdgeInsetConvertible))
+    (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)), BBEdgeInsetConvertible))
     -> [NSLayoutConstraint] {
         [lhs.0.0 == rhs.0.0.0 + rhs.1.top,
          lhs.0.1 == rhs.0.0.1 + rhs.1.left,
@@ -106,7 +106,7 @@ public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayo
     lhs: ((NSLayoutAnchor<FirstAnchorType>, NSLayoutAnchor<SecondAnchorType>),
     (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)),
     rhs: (((NSLayoutAnchor<FirstAnchorType>, NSLayoutAnchor<SecondAnchorType>),
-    (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)), EdgeInsetConvertible))
+    (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)), BBEdgeInsetConvertible))
     -> [NSLayoutConstraint] {
         [lhs.0.0 <= rhs.0.0.0 + rhs.1.top,
          lhs.0.1 <= rhs.0.0.1 + rhs.1.left,
@@ -122,7 +122,7 @@ public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayo
     lhs: ((NSLayoutAnchor<FirstAnchorType>, NSLayoutAnchor<SecondAnchorType>),
     (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)),
     rhs: (((NSLayoutAnchor<FirstAnchorType>, NSLayoutAnchor<SecondAnchorType>),
-    (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)), EdgeInsetConvertible))
+    (NSLayoutAnchor<ThirdAnchorType>, NSLayoutAnchor<FourthAnchorType>)), BBEdgeInsetConvertible))
     -> [NSLayoutConstraint] {
         [lhs.0.0 >= rhs.0.0.0 + rhs.1.top,
          lhs.0.1 >= rhs.0.0.1 + rhs.1.left,
