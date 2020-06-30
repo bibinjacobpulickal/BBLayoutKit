@@ -120,21 +120,21 @@ public extension BBAnchorable {
                 lhs: .bottom,
                 relation: bottomRelation,
                 rhs: bottom ?? bottomAnchor,
-                constant: inset.bottom)
+                constant: -inset.bottom)
         }
         if sides.contains(.right) || right != nil {
             view.anchor(
                 lhs: .right,
                 relation: rightRelation,
                 rhs: right ?? rightAnchor,
-                constant: inset.right)
+                constant: -inset.right)
         }
         if sides.contains(.trailing) || trailing != nil {
             view.anchor(
                 lhs: .trailing,
                 relation: trailingRelation,
                 rhs: trailing ?? trailingAnchor,
-                constant: inset.right)
+                constant: -inset.right)
         }
     }
 
