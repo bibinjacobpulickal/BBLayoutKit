@@ -63,13 +63,13 @@ public func + (lhs: (NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayou
 public func + (lhs: (NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>),
                rhs: BBEdgeInsetConvertible)
     -> ((NSLayoutAnchor<NSLayoutXAxisAnchor>, NSLayoutAnchor<NSLayoutXAxisAnchor>), (CGFloat, CGFloat)) {
-        ((lhs.0, lhs.1), (rhs.left, rhs.right))
+        ((lhs.0, lhs.1), (rhs.left, -rhs.right))
 }
 
 public func + (lhs: (NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutYAxisAnchor>),
                rhs: BBEdgeInsetConvertible)
     -> ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayoutYAxisAnchor>), (CGFloat, CGFloat)) {
-        ((lhs.0, lhs.1), (rhs.top, rhs.bottom))
+        ((lhs.0, lhs.1), (rhs.top, -rhs.bottom))
 }
 
 // MARK: - Double Anchor Constraint With Constant And Relation
