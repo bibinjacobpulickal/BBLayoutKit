@@ -39,9 +39,9 @@ extension CGFloat: BBEdgeInsetConvertible {
 
     public var left: CGFloat { self }
 
-    public var bottom: CGFloat { -self }
+    public var bottom: CGFloat { self }
 
-    public var right: CGFloat { -self }
+    public var right: CGFloat { self }
 }
 
 extension Double: BBEdgeInsetConvertible {
@@ -50,9 +50,9 @@ extension Double: BBEdgeInsetConvertible {
 
     public var left: CGFloat { CGFloat(self) }
 
-    public var bottom: CGFloat { -CGFloat(self) }
+    public var bottom: CGFloat { CGFloat(self) }
 
-    public var right: CGFloat { -CGFloat(self) }
+    public var right: CGFloat { CGFloat(self) }
 }
 
 extension Int: BBEdgeInsetConvertible {
@@ -61,7 +61,7 @@ extension Int: BBEdgeInsetConvertible {
 
     public var left: CGFloat { CGFloat(self) }
 
-    public var bottom: CGFloat { -CGFloat(self) }
+    public var bottom: CGFloat { CGFloat(self) }
 
-    public var right: CGFloat { -CGFloat(self) }
+    public var right: CGFloat { CGFloat(self) }
 }

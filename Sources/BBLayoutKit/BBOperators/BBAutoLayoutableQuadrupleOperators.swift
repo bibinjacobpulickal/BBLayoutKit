@@ -94,8 +94,8 @@ public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayo
     -> [NSLayoutConstraint] {
         [lhs.0.0 == rhs.0.0.0 + rhs.1.top,
          lhs.0.1 == rhs.0.0.1 + rhs.1.left,
-         lhs.1.0 == rhs.0.1.0 + rhs.1.bottom,
-         lhs.1.1 == rhs.0.1.1 + rhs.1.right]
+         lhs.1.0 == rhs.0.1.0 - rhs.1.bottom,
+         lhs.1.1 == rhs.0.1.1 - rhs.1.right]
 }
 
 @discardableResult public func <=<
@@ -110,8 +110,8 @@ public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayo
     -> [NSLayoutConstraint] {
         [lhs.0.0 <= rhs.0.0.0 + rhs.1.top,
          lhs.0.1 <= rhs.0.0.1 + rhs.1.left,
-         lhs.1.0 <= rhs.0.1.0 + rhs.1.bottom,
-         lhs.1.1 <= rhs.0.1.1 + rhs.1.right]
+         lhs.1.0 <= rhs.0.1.0 - rhs.1.bottom,
+         lhs.1.1 <= rhs.0.1.1 - rhs.1.right]
 }
 
 @discardableResult public func >=<
@@ -126,6 +126,6 @@ public func - (lhs: ((NSLayoutAnchor<NSLayoutYAxisAnchor>, NSLayoutAnchor<NSLayo
     -> [NSLayoutConstraint] {
         [lhs.0.0 >= rhs.0.0.0 + rhs.1.top,
          lhs.0.1 >= rhs.0.0.1 + rhs.1.left,
-         lhs.1.0 >= rhs.0.1.0 + rhs.1.bottom,
-         lhs.1.1 >= rhs.0.1.1 + rhs.1.right]
+         lhs.1.0 >= rhs.0.1.0 - rhs.1.bottom,
+         lhs.1.1 >= rhs.0.1.1 - rhs.1.right]
 }
