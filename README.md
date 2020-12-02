@@ -5,7 +5,7 @@ A simple and lightweight Auto-Layout Kit that makes you feels laying out views a
 [![Platform](http://img.shields.io/badge/platform-ios-blue.svg?style=flat)](https://developer.apple.com/iphone/index.action)
 [![Language](http://img.shields.io/badge/language-swift-brightgreen.svg?style=flat)](https://developer.apple.com/swift)
 ![Swift version](https://img.shields.io/badge/swift-5.3-orange.svg)
-[![License](http://img.shields.io/cocoapods/l/BBLayoutKit.svg?style=flat)](https://github.com/bibinjacobpulickal/BBLayoutKit/blob/master/LICENSE)
+[![License](http://img.shields.io/badge/license-MIT-lightgray.svg?style=flat)](https://github.com/bibinjacobpulickal/BBLayoutKit/blob/master/LICENSE)
 
 ## Why use BBLayoutKit?
 
