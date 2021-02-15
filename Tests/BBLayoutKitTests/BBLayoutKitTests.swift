@@ -1,18 +1,19 @@
 import XCTest
 @testable import BBLayoutKit
 
+#if canImport(UIKit)
 final class BBLayoutKitTests: XCTestCase {
 
-    static var allTests = [
+    static var allUIKitTests = [
         ("testExample", testExample),
-        ("testAddSubview", testAddSubview)
+        ("testAddSubview", testAddSubview),
+        ("testTamic", testTamic)
     ]
 
     func testExample() {
         XCTAssertEqual("BBLayoutKit", "BBLayoutKit")
     }
 
-    #if canImport(UIKit)
     func testAddSubview() {
 
         let view = UIView()
@@ -29,9 +30,9 @@ final class BBLayoutKitTests: XCTestCase {
         let view = UIView()
         let subView = UIView()
 
-        view.addSubview(subView) {  }
+        view.addSubview(subView) { }
 
         XCTAssertFalse(subView.tamic)
     }
-    #endif
 }
+#endif
