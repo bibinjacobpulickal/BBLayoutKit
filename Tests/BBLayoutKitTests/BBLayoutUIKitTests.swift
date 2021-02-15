@@ -2,7 +2,7 @@ import XCTest
 @testable import BBLayoutKit
 
 #if canImport(UIKit)
-final class BBLayoutKitTests: XCTestCase {
+final class BBLayoutUIKitTests: XCTestCase {
 
     static var allUIKitTests = [
         ("testExample", testExample),
