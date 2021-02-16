@@ -21,8 +21,7 @@ final class BBLayoutUIKitTests: XCTestCase {
 
         view.addSubview(subView)
 
-        XCTAssertTrue(view.subviews.contains(subView))
-        XCTAssertTrue(subView.superview == view)
+        testView(view, has: subView)
     }
 
     func testTamic() {
@@ -32,7 +31,14 @@ final class BBLayoutUIKitTests: XCTestCase {
 
         view.addSubview(subView) { }
 
+        testView(view, has: subView)
         XCTAssertFalse(subView.tamic)
+    }
+
+    func testView(_ view: UIView, has subView: UIView) {
+
+        XCTAssertTrue(view.subviews.contains(subView))
+        XCTAssertTrue(subView.superview == view)
     }
 }
 #endif
