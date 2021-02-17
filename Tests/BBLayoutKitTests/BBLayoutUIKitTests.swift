@@ -6,7 +6,8 @@ final class BBLayoutUIKitTests: XCTestCase {
 
     static var allUIKitTests = [
         ("testAddSubview", testAddSubview),
-        ("testTamic", testTamic)
+        ("testTamic", testTamic),
+        ("testTopConstraint", testTopConstraint)
     ]
 
     private let view = UIView()
@@ -23,6 +24,16 @@ final class BBLayoutUIKitTests: XCTestCase {
     func testTamic() {
         testAddSubview()
         XCTAssertFalse(subView.tamic)
+    }
+
+    func testTopConstraint() {
+        testAddSubview()
+        let topConstraint = view.top == subView.top
+        XCTAssertTrue(topConstraint.isActive)
+        XCTAssertTrue(topConstraint.constant == 0)
+        XCTAssertTrue(topConstraint.multiplier == 1)
+        XCTAssertTrue(topConstraint.firstAttribute == .top)
+        XCTAssertTrue(topConstraint.secondAttribute == .top)
     }
 }
 #endif
