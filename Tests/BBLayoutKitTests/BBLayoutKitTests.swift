@@ -4,7 +4,9 @@ import XCTest
 final class BBLayoutKitTests: XCTestCase {
 
     static var allLayoutKitTests = [
-        ("testAddSubview", testAddSubview)
+        ("testAddSubview", testAddSubview),
+        ("testTamic", testTamic),
+        ("testTopToTopConstraint", testTopToTopConstraint)
     ]
 
     #if canImport(UIKit)
@@ -28,13 +30,28 @@ final class BBLayoutKitTests: XCTestCase {
         XCTAssertFalse(subView.tamic)
     }
 
-    func testTopConstraint() {
+    func testConstraint(
+        _ constraint: NSLayoutConstraint,
+        firstAttribute: NSLayoutConstraint.Attribute,
+        secondAttribute: NSLayoutConstraint.Attribute,
+        relation: NSLayoutConstraint.Relation = .equal,
+        constant: CGFloat                     = 0,
+        multiplier: CGFloat                   = 1,
+        priority: UILayoutPriority            = .required,
+        active: Bool                          = true) {
+
+        XCTAssertTrue(constraint.firstAttribute == firstAttribute)
+        XCTAssertTrue(constraint.secondAttribute == secondAttribute)
+        XCTAssertTrue(constraint.relation == relation)
+        XCTAssertTrue(constraint.constant == constant)
+        XCTAssertTrue(constraint.multiplier == multiplier)
+        XCTAssertTrue(constraint.priority == priority)
+        XCTAssertTrue(constraint.isActive == active)
+    }
+
+    func testTopToTopConstraint() {
         testAddSubview()
-        let topConstraint = view.top == subView.top
-        XCTAssertTrue(topConstraint.isActive)
-        XCTAssertTrue(topConstraint.constant == 0)
-        XCTAssertTrue(topConstraint.multiplier == 1)
-        XCTAssertTrue(topConstraint.firstAttribute == .top)
-        XCTAssertTrue(topConstraint.secondAttribute == .top)
+        let topToTopConstraint = view.top == subView.top
+        testConstraint(topToTopConstraint, firstAttribute: .top, secondAttribute: .top)
     }
 }
