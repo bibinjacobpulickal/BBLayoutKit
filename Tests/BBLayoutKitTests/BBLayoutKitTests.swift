@@ -66,4 +66,10 @@ final class BBLayoutKitTests: XCTestCase {
         let topToTopConstraint = view.bottom == subView.bottom
         testConstraint(topToTopConstraint, firstAttribute: .bottom, secondAttribute: .bottom)
     }
+
+    func testBottomToTopConstraint() {
+        testAddSubview()
+        let topToTopConstraint = view.bottom == subView.top
+        testConstraint(topToTopConstraint, firstAttribute: .bottom, secondAttribute: .top)
+    }
 }
