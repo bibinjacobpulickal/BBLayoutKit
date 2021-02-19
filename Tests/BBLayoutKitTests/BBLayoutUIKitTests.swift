@@ -11,24 +11,24 @@ final class BBLayoutUIKitTests: XCTestCase {
     ]
 
     private let view = UIView()
-    private let subView = UIView()
+    private let subview = UIView()
 
     func testAddSubview() {
 
-        view.addSubview(subView) { }
+        view.addSubview(subview) { }
 
-        XCTAssertTrue(view.subviews.contains(subView))
-        XCTAssertTrue(subView.superview == view)
+        XCTAssertTrue(view.subviews.contains(subview))
+        XCTAssertTrue(subview.superview == view)
     }
 
     func testTamic() {
         testAddSubview()
-        XCTAssertFalse(subView.tamic)
+        XCTAssertFalse(subview.tamic)
     }
 
     func testTopConstraint() {
         testAddSubview()
-        let topConstraint = view.top == subView.top
+        let topConstraint = view.top == subview.top
         XCTAssertTrue(topConstraint.isActive)
         XCTAssertTrue(topConstraint.constant == 0)
         XCTAssertTrue(topConstraint.multiplier == 1)

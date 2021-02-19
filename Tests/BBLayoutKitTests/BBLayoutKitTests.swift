@@ -6,28 +6,35 @@ final class BBLayoutKitTests: XCTestCase {
     static var allLayoutKitTests = [
         ("testAddSubview", testAddSubview),
         ("testTamic", testTamic),
-        ("testTopToTopConstraint", testTopToTopConstraint)
+        ("testTopToTopConstraint", testTopToTopConstraint),
+        ("testTopToBottomConstraint", testTopToBottomConstraint),
+        ("testBottomToBottomConstraint", testBottomToBottomConstraint),
+        ("testBottomToTopConstraint", testBottomToTopConstraint),
+        ("testLeadingToLeadingConstraint", testLeadingToLeadingConstraint),
+        ("testLeadingToTrailingConstraint", testLeadingToTrailingConstraint),
+        ("testTrailingToTrailingConstraint", testTrailingToTrailingConstraint),
+        ("testTrailingToLeadingConstraint", testTrailingToLeadingConstraint)
     ]
 
     #if canImport(UIKit)
     private let view    = UIView()
-    private let subView = UIView()
+    private let subview = UIView()
     #elseif canImport(AppKit)
     private let view    = NSView()
-    private let subView = NSView()
+    private let subview = NSView()
     #endif
 
     func testAddSubview() {
 
-        view.addSubview(subView) { }
+        view.addSubview(subview) { }
 
-        XCTAssertTrue(view.subviews.contains(subView))
-        XCTAssertTrue(subView.superview == view)
+        XCTAssertTrue(view.subviews.contains(subview))
+        XCTAssertTrue(subview.superview == view)
     }
 
     func testTamic() {
         testAddSubview()
-        XCTAssertFalse(subView.tamic)
+        XCTAssertFalse(subview.tamic)
     }
 
     func testConstraint(
@@ -49,27 +56,47 @@ final class BBLayoutKitTests: XCTestCase {
         XCTAssertTrue(constraint.isActive == active)
     }
 
+    func testLayoutYAxisAnchors() {
+        let viewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(view)
+        let subviewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(subview)
+        testAddSubview()
+        viewLayoutYAxisAnchorAttributes.forEach { viewAnchor in
+            subviewLayoutYAxisAnchorAttributes.forEach { subviewAnchor in
+                let constraint = viewAnchor.anchor == subviewAnchor.anchor
+                testConstraint(constraint, firstAttribute: viewAnchor.attribute, secondAttribute: subviewAnchor.attribute)
+            }
+        }
+    }
+
+    func getLayoutYAxisAnchorAttributesForView(_ view: BBAnchorable) -> [(anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute)] {
+        [
+            (view.top, .top),
+            (view.bottom, .bottom),
+            (view.centerY, .centerY)
+        ]
+    }
+
     func testTopToTopConstraint() {
         testAddSubview()
-        let topToTopConstraint = view.top == subView.top
+        let topToTopConstraint = view.top == subview.top
         testConstraint(topToTopConstraint, firstAttribute: .top, secondAttribute: .top)
     }
 
     func testTopToBottomConstraint() {
         testAddSubview()
-        let topToTopConstraint = view.top == subView.bottom
+        let topToTopConstraint = view.top == subview.bottom
         testConstraint(topToTopConstraint, firstAttribute: .top, secondAttribute: .bottom)
     }
 
     func testBottomToBottomConstraint() {
         testAddSubview()
-        let topToTopConstraint = view.bottom == subView.bottom
+        let topToTopConstraint = view.bottom == subview.bottom
         testConstraint(topToTopConstraint, firstAttribute: .bottom, secondAttribute: .bottom)
     }
 
     func testBottomToTopConstraint() {
         testAddSubview()
-        let topToTopConstraint = view.bottom == subView.top
+        let topToTopConstraint = view.bottom == subview.top
         testConstraint(topToTopConstraint, firstAttribute: .bottom, secondAttribute: .top)
     }
 }

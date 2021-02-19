@@ -17,28 +17,28 @@ final class BBLayoutAppKitTests: XCTestCase {
     func testAddSubview() {
 
         let view = NSView()
-        let subView = NSView()
+        let subview = NSView()
 
-        view.addSubview(subView)
+        view.addSubview(subview)
 
-        testView(view, has: subView)
+        testView(view, has: subview)
     }
 
     func testTamic() {
 
         let view = NSView()
-        let subView = NSView()
+        let subview = NSView()
 
-        view.addSubview(subView) { }
+        view.addSubview(subview) { }
 
-        testView(view, has: subView)
-        XCTAssertFalse(subView.tamic)
+        testView(view, has: subview)
+        XCTAssertFalse(subview.tamic)
     }
 
-    func testView(_ view: NSView, has subView: NSView) {
+    func testView(_ view: NSView, has subview: NSView) {
 
-        XCTAssertTrue(view.subviews.contains(subView))
-        XCTAssertTrue(subView.superview == view)
+        XCTAssertTrue(view.subviews.contains(subview))
+        XCTAssertTrue(subview.superview == view)
     }
 }
 #endif
