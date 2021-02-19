@@ -68,4 +68,14 @@ final class BBLayoutKitTests: XCTestCase {
             (view.centerY, .centerY)
         ]
     }
+
+    func getLayoutXAxisAnchorAttributesForView(_ view: BBAnchorable) -> [(anchor: NSLayoutXAxisAnchor, attribute: NSLayoutConstraint.Attribute)] {
+        [
+            (view.leading, .leading),
+            (view.trailing, .trailing),
+            (view.left, .left),
+            (view.right, .right),
+            (view.centerX, .centerX)
+        ]
+    }
 }
