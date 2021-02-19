@@ -6,10 +6,7 @@ final class BBLayoutKitTests: XCTestCase {
     static var allLayoutKitTests = [
         ("testAddSubview", testAddSubview),
         ("testTamic", testTamic),
-        ("testTopToTopConstraint", testTopToTopConstraint),
-        ("testTopToBottomConstraint", testTopToBottomConstraint),
-        ("testBottomToBottomConstraint", testBottomToBottomConstraint),
-        ("testBottomToTopConstraint", testBottomToTopConstraint)
+        ("testLayoutYAxisAnchors", testLayoutYAxisAnchors)
     ]
 
     #if canImport(UIKit)
