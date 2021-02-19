@@ -7,7 +7,8 @@ final class BBLayoutKitTests: XCTestCase {
         ("testAddSubview", testAddSubview),
         ("testTamic", testTamic),
         ("testLayoutYAxisAnchors", testLayoutYAxisAnchors),
-        ("testLayoutXAxisAnchors", testLayoutXAxisAnchors)
+        ("testLayoutXAxisAnchors1", testLayoutXAxisAnchors1),
+        ("testLayoutXAxisAnchors2", testLayoutXAxisAnchors2)
     ]
 
     #if canImport(UIKit)
@@ -70,9 +71,9 @@ final class BBLayoutKitTests: XCTestCase {
         ]
     }
 
-    func testLayoutXAxisAnchors() {
-        let viewLayoutXAxisAnchorAttributes = getLayoutXAxisAnchorAttributesForView(view)
-        let subviewLayoutXAxisAnchorAttributes = getLayoutXAxisAnchorAttributesForView(subview)
+    func testLayoutXAxisAnchors1() {
+        let viewLayoutXAxisAnchorAttributes = getLayoutXAxisAnchorAttributesForView1(view)
+        let subviewLayoutXAxisAnchorAttributes = getLayoutXAxisAnchorAttributesForView1(subview)
         testAddSubview()
         viewLayoutXAxisAnchorAttributes.forEach { viewAnchor in
             subviewLayoutXAxisAnchorAttributes.forEach { subviewAnchor in
@@ -82,10 +83,30 @@ final class BBLayoutKitTests: XCTestCase {
         }
     }
 
-    func getLayoutXAxisAnchorAttributesForView(_ view: BBAnchorable) -> [(anchor: NSLayoutXAxisAnchor, attribute: NSLayoutConstraint.Attribute)] {
+    func getLayoutXAxisAnchorAttributesForView1(_ view: BBAnchorable) -> [(anchor: NSLayoutXAxisAnchor, attribute: NSLayoutConstraint.Attribute)] {
         [
             (view.leading, .leading),
             (view.trailing, .trailing),
+            (view.centerX, .centerX)
+        ]
+    }
+
+    func testLayoutXAxisAnchors2() {
+        let viewLayoutXAxisAnchorAttributes = getLayoutXAxisAnchorAttributesForView2(view)
+        let subviewLayoutXAxisAnchorAttributes = getLayoutXAxisAnchorAttributesForView2(subview)
+        testAddSubview()
+        viewLayoutXAxisAnchorAttributes.forEach { viewAnchor in
+            subviewLayoutXAxisAnchorAttributes.forEach { subviewAnchor in
+                let constraint = viewAnchor.anchor == subviewAnchor.anchor
+                testConstraint(constraint, firstAttribute: viewAnchor.attribute, secondAttribute: subviewAnchor.attribute)
+            }
+        }
+    }
+
+    func getLayoutXAxisAnchorAttributesForView2(_ view: BBAnchorable) -> [(anchor: NSLayoutXAxisAnchor, attribute: NSLayoutConstraint.Attribute)] {
+        [
+            (view.left, .left),
+            (view.right, .right),
             (view.centerX, .centerX)
         ]
     }
