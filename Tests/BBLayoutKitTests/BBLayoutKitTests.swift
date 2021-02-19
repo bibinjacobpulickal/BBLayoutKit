@@ -9,11 +9,7 @@ final class BBLayoutKitTests: XCTestCase {
         ("testTopToTopConstraint", testTopToTopConstraint),
         ("testTopToBottomConstraint", testTopToBottomConstraint),
         ("testBottomToBottomConstraint", testBottomToBottomConstraint),
-        ("testBottomToTopConstraint", testBottomToTopConstraint),
-        ("testLeadingToLeadingConstraint", testLeadingToLeadingConstraint),
-        ("testLeadingToTrailingConstraint", testLeadingToTrailingConstraint),
-        ("testTrailingToTrailingConstraint", testTrailingToTrailingConstraint),
-        ("testTrailingToLeadingConstraint", testTrailingToLeadingConstraint)
+        ("testBottomToTopConstraint", testBottomToTopConstraint)
     ]
 
     #if canImport(UIKit)
