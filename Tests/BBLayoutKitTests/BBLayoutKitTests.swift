@@ -8,7 +8,8 @@ final class BBLayoutKitTests: XCTestCase {
         ("testTamic", testTamic),
         ("testLayoutYAxisAnchors", testLayoutYAxisAnchors),
         ("testLayoutXAxisAnchors1", testLayoutXAxisAnchors1),
-        ("testLayoutXAxisAnchors2", testLayoutXAxisAnchors2)
+        ("testLayoutXAxisAnchors2", testLayoutXAxisAnchors2),
+        ("testLayoutDimensionAnchors", testLayoutDimensionAnchors)
     ]
 
     #if canImport(UIKit)
@@ -108,6 +109,25 @@ final class BBLayoutKitTests: XCTestCase {
             (view.left, .left),
             (view.right, .right),
             (view.centerX, .centerX)
+        ]
+    }
+
+    func testLayoutDimensionAnchors() {
+        let viewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(view)
+        let subviewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(subview)
+        testAddSubview()
+        viewLayoutYAxisAnchorAttributes.forEach { viewAnchor in
+            subviewLayoutYAxisAnchorAttributes.forEach { subviewAnchor in
+                let constraint = viewAnchor.anchor == subviewAnchor.anchor
+                testConstraint(constraint, firstAttribute: viewAnchor.attribute, secondAttribute: subviewAnchor.attribute)
+            }
+        }
+    }
+
+    func getLayoutDimensionAnchorAttributesForView(_ view: BBAnchorable) -> [(anchor: NSLayoutDimension, attribute: NSLayoutConstraint.Attribute)] {
+        [
+            (view.width, .width),
+            (view.height, .height)
         ]
     }
 }
