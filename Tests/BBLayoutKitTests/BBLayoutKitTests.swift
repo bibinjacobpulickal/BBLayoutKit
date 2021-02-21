@@ -39,7 +39,7 @@ final class BBLayoutKitTests: XCTestCase {
 
         viewLayoutYAxisAnchorAttributes.forEach { viewAnchor in
             subviewLayoutYAxisAnchorAttributes.forEach { subviewAnchor in
-                testLayoutYAxisAnchorRelations(viewAnchor: viewAnchor, subviewAnchor: subviewAnchor)
+                testLayoutYAxisAnchorRelationsAndPriorities(viewAnchor: viewAnchor, subviewAnchor: subviewAnchor)
             }
         }
     }
@@ -111,28 +111,42 @@ final class BBLayoutKitTests: XCTestCase {
         ]
     }
 
-    func testLayoutYAxisAnchorRelations(
+    func testLayoutYAxisAnchorRelationsAndPriorities(
         viewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute),
         subviewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute)) {
 
-        let relations = [NSLayoutConstraint.Relation.equal, .greaterThanOrEqual, .lessThanOrEqual]
+        let relations = [NSLayoutConstraint.Relation.equal,
+                         .greaterThanOrEqual,
+                         .lessThanOrEqual]
+        let priorities = [UILayoutPriority.required,
+                          .defaultHigh,
+                          .dragThatCanResizeScene,
+                          .sceneSizeStayPut,
+                          .dragThatCannotResizeScene,
+                          .defaultLow,
+                          .fittingSizeLevel]
+
         testAddSubview()
 
         relations.forEach { relation in
-            var constraint: NSLayoutConstraint
-            switch relation {
-            case .lessThanOrEqual:
-                constraint = viewAnchor.anchor <= subviewAnchor.anchor
-            case .greaterThanOrEqual:
-                constraint = viewAnchor.anchor >= subviewAnchor.anchor
-            default:
-                constraint = viewAnchor.anchor == subviewAnchor.anchor
+            priorities.forEach { priority in
+                var constraint: NSLayoutConstraint
+                switch relation {
+                case .lessThanOrEqual:
+                    constraint = viewAnchor.anchor <= subviewAnchor.anchor
+                case .greaterThanOrEqual:
+                    constraint = viewAnchor.anchor >= subviewAnchor.anchor
+                default:
+                    constraint = viewAnchor.anchor == subviewAnchor.anchor
+                }
+                constraint.priority = priority
+                testConstraint(
+                    constraint,
+                    firstAttribute: viewAnchor.attribute,
+                    secondAttribute: subviewAnchor.attribute,
+                    relation: relation,
+                    priority: priority)
             }
-            testConstraint(
-                constraint,
-                firstAttribute: viewAnchor.attribute,
-                secondAttribute: subviewAnchor.attribute,
-                relation: relation)
         }
     }
 
