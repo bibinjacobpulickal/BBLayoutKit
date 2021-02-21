@@ -33,25 +33,6 @@ final class BBLayoutKitTests: XCTestCase {
         XCTAssertFalse(subview.tamic)
     }
 
-    func testConstraint(
-        _ constraint: NSLayoutConstraint,
-        firstAttribute: NSLayoutConstraint.Attribute,
-        secondAttribute: NSLayoutConstraint.Attribute,
-        relation: NSLayoutConstraint.Relation = .equal,
-        constant: CGFloat                     = 0,
-        multiplier: CGFloat                   = 1,
-        priority: UILayoutPriority            = .required,
-        active: Bool                          = true) {
-
-        XCTAssertTrue(constraint.firstAttribute == firstAttribute)
-        XCTAssertTrue(constraint.secondAttribute == secondAttribute)
-        XCTAssertTrue(constraint.relation == relation)
-        XCTAssertTrue(constraint.constant == constant)
-        XCTAssertTrue(constraint.multiplier == multiplier)
-        XCTAssertTrue(constraint.priority == priority)
-        XCTAssertTrue(constraint.isActive == active)
-    }
-
     func testLayoutYAxisAnchors() {
         let viewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(view)
         let subviewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(subview)
@@ -129,5 +110,42 @@ final class BBLayoutKitTests: XCTestCase {
             (view.width, .width),
             (view.height, .height)
         ]
+    }
+
+    func testConstraintRelation(
+        viewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute),
+        subviewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute)) {
+        let relations = [NSLayoutConstraint.Relation.equal, .greaterThanOrEqual, .lessThanOrEqual]
+        relations.forEach { relation in
+            var constraint: NSLayoutConstraint
+            switch relation {
+            case .lessThanOrEqual:
+                constraint = viewAnchor.anchor <= subviewAnchor.anchor
+            case .greaterThanOrEqual:
+                constraint = viewAnchor.anchor >= subviewAnchor.anchor
+            default:
+                constraint = viewAnchor.anchor == subviewAnchor.anchor
+            }
+            testConstraint(constraint, firstAttribute: viewAnchor.attribute, secondAttribute: subviewAnchor.attribute)
+        }
+    }
+
+    func testConstraint(
+        _ constraint: NSLayoutConstraint,
+        firstAttribute: NSLayoutConstraint.Attribute,
+        secondAttribute: NSLayoutConstraint.Attribute,
+        relation: NSLayoutConstraint.Relation = .equal,
+        constant: CGFloat                     = 0,
+        multiplier: CGFloat                   = 1,
+        priority: UILayoutPriority            = .required,
+        active: Bool                          = true) {
+
+        XCTAssertTrue(constraint.firstAttribute == firstAttribute)
+        XCTAssertTrue(constraint.secondAttribute == secondAttribute)
+        XCTAssertTrue(constraint.relation == relation)
+        XCTAssertTrue(constraint.constant == constant)
+        XCTAssertTrue(constraint.multiplier == multiplier)
+        XCTAssertTrue(constraint.priority == priority)
+        XCTAssertTrue(constraint.isActive == active)
     }
 }
