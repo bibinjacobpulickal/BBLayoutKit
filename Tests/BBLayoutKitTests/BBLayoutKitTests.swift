@@ -36,11 +36,10 @@ final class BBLayoutKitTests: XCTestCase {
     func testLayoutYAxisAnchors() {
         let viewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(view)
         let subviewLayoutYAxisAnchorAttributes = getLayoutYAxisAnchorAttributesForView(subview)
-        testAddSubview()
+
         viewLayoutYAxisAnchorAttributes.forEach { viewAnchor in
             subviewLayoutYAxisAnchorAttributes.forEach { subviewAnchor in
-                let constraint = viewAnchor.anchor == subviewAnchor.anchor
-                testConstraint(constraint, firstAttribute: viewAnchor.attribute, secondAttribute: subviewAnchor.attribute)
+                testLayoutYAxisAnchorRelations(viewAnchor: viewAnchor, subviewAnchor: subviewAnchor)
             }
         }
     }
@@ -112,10 +111,13 @@ final class BBLayoutKitTests: XCTestCase {
         ]
     }
 
-    func testConstraintRelation(
+    func testLayoutYAxisAnchorRelations(
         viewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute),
         subviewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute)) {
+
         let relations = [NSLayoutConstraint.Relation.equal, .greaterThanOrEqual, .lessThanOrEqual]
+        testAddSubview()
+
         relations.forEach { relation in
             var constraint: NSLayoutConstraint
             switch relation {
@@ -126,7 +128,11 @@ final class BBLayoutKitTests: XCTestCase {
             default:
                 constraint = viewAnchor.anchor == subviewAnchor.anchor
             }
-            testConstraint(constraint, firstAttribute: viewAnchor.attribute, secondAttribute: subviewAnchor.attribute)
+            testConstraint(
+                constraint,
+                firstAttribute: viewAnchor.attribute,
+                secondAttribute: subviewAnchor.attribute,
+                relation: relation)
         }
     }
 
