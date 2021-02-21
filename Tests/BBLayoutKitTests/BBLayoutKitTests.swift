@@ -39,7 +39,7 @@ final class BBLayoutKitTests: XCTestCase {
 
         viewLayoutYAxisAnchorAttributes.forEach { viewAnchor in
             subviewLayoutYAxisAnchorAttributes.forEach { subviewAnchor in
-                testLayoutYAxisAnchorRelationsAndPriorities(viewAnchor: viewAnchor, subviewAnchor: subviewAnchor)
+                testLayoutYAxisAnchorRelationsPrioritiesAndConstants(viewAnchor: viewAnchor, subviewAnchor: subviewAnchor)
             }
         }
     }
@@ -111,7 +111,7 @@ final class BBLayoutKitTests: XCTestCase {
         ]
     }
 
-    func testLayoutYAxisAnchorRelationsAndPriorities(
+    func testLayoutYAxisAnchorRelationsPrioritiesAndConstants(
         viewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute),
         subviewAnchor: (anchor: NSLayoutYAxisAnchor, attribute: NSLayoutConstraint.Attribute)) {
 
@@ -130,14 +130,17 @@ final class BBLayoutKitTests: XCTestCase {
 
         relations.forEach { relation in
             priorities.forEach { priority in
+
                 var constraint: NSLayoutConstraint
+                let constant = CGFloat.random(in: -1000...1000)
+
                 switch relation {
                 case .lessThanOrEqual:
-                    constraint = viewAnchor.anchor <= subviewAnchor.anchor
+                    constraint = viewAnchor.anchor <= subviewAnchor.anchor + constant
                 case .greaterThanOrEqual:
-                    constraint = viewAnchor.anchor >= subviewAnchor.anchor
+                    constraint = viewAnchor.anchor >= subviewAnchor.anchor + constant
                 default:
-                    constraint = viewAnchor.anchor == subviewAnchor.anchor
+                    constraint = viewAnchor.anchor == subviewAnchor.anchor + constant
                 }
                 constraint.priority = priority
                 testConstraint(
@@ -145,6 +148,7 @@ final class BBLayoutKitTests: XCTestCase {
                     firstAttribute: viewAnchor.attribute,
                     secondAttribute: subviewAnchor.attribute,
                     relation: relation,
+                    constant: constant,
                     priority: priority)
             }
         }
