@@ -125,31 +125,47 @@ final class BBLayoutKitTests: XCTestCase {
                           .dragThatCannotResizeScene,
                           .defaultLow,
                           .fittingSizeLevel]
+        let isActives = [true, false]
 
         testAddSubview()
 
         relations.forEach { relation in
             priorities.forEach { priority in
+                isActives.forEach { isActive in
 
-                var constraint: NSLayoutConstraint
-                let constant = CGFloat.random(in: -1000...1000)
+                    var constraint: NSLayoutConstraint
+                    let constant = CGFloat.random(in: -1000...1000)
 
-                switch relation {
-                case .lessThanOrEqual:
-                    constraint = viewAnchor.anchor <= subviewAnchor.anchor + constant
-                case .greaterThanOrEqual:
-                    constraint = viewAnchor.anchor >= subviewAnchor.anchor + constant
-                default:
-                    constraint = viewAnchor.anchor == subviewAnchor.anchor + constant
+                    switch relation {
+                    case .lessThanOrEqual:
+                        if isActive {
+                            constraint = viewAnchor.anchor <= subviewAnchor.anchor + constant
+                        } else {
+                            constraint = viewAnchor.anchor !<= subviewAnchor.anchor + constant
+                        }
+                    case .greaterThanOrEqual:
+                        if isActive {
+                            constraint = viewAnchor.anchor >= subviewAnchor.anchor + constant
+                        } else {
+                            constraint = viewAnchor.anchor !>= subviewAnchor.anchor + constant
+                        }
+                    default:
+                        if isActive {
+                            constraint = viewAnchor.anchor == subviewAnchor.anchor + constant
+                        } else {
+                            constraint = viewAnchor.anchor != subviewAnchor.anchor + constant
+                        }
+                    }
+                    constraint.priority = priority
+                    testConstraint(
+                        constraint,
+                        firstAttribute: viewAnchor.attribute,
+                        secondAttribute: subviewAnchor.attribute,
+                        relation: relation,
+                        constant: constant,
+                        priority: priority,
+                        isActive: isActive)
                 }
-                constraint.priority = priority
-                testConstraint(
-                    constraint,
-                    firstAttribute: viewAnchor.attribute,
-                    secondAttribute: subviewAnchor.attribute,
-                    relation: relation,
-                    constant: constant,
-                    priority: priority)
             }
         }
     }
@@ -162,7 +178,7 @@ final class BBLayoutKitTests: XCTestCase {
         constant: CGFloat                     = 0,
         multiplier: CGFloat                   = 1,
         priority: UILayoutPriority            = .required,
-        active: Bool                          = true) {
+        isActive: Bool                        = true) {
 
         XCTAssertTrue(constraint.firstAttribute == firstAttribute)
         XCTAssertTrue(constraint.secondAttribute == secondAttribute)
@@ -170,6 +186,6 @@ final class BBLayoutKitTests: XCTestCase {
         XCTAssertTrue(constraint.constant == constant)
         XCTAssertTrue(constraint.multiplier == multiplier)
         XCTAssertTrue(constraint.priority == priority)
-        XCTAssertTrue(constraint.isActive == active)
+        XCTAssertTrue(constraint.isActive == isActive)
     }
 }
